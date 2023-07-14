@@ -1,0 +1,89 @@
+body{
+  margin:0;
+}
+.panels{
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* panel children that is paragraph element */
+.panel > *{
+  transition: transform 0.5s;
+  width: 100%;
+  flex:1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* text animation */
+
+.panel > *:first-child{
+  transform: translateY(-100%);
+}
+.panel.open-active > *:first-child{
+  transform: translateY(0);
+}
+.panel > *:last-child{
+  transform: translateY(100%);
+}
+.panel.open-active > *:last-child{
+  transform: translateY(0);
+}
+
+
+.panel{
+  background: #6B0F9C;
+  font-size: 10px;
+  background-size:cover;
+  background-position: center;
+  flex:1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: font-size 0.7s cubic-bezier(0.61,-0.19,0.7,-0.11),
+              flex 0.7s cubic-bezier(0.61,-0.19,0.7,-0.11),
+              background 0.2s;
+}
+.panel p{
+  color:white;
+  text-transform: uppercase;
+  font-family: 'Amatic SC',cursive;
+  font-size:2em;
+}
+
+.panel p:nth-child(2){
+  font-size: 4em;
+}
+
+
+/* image animation */
+.panel.grow{
+  flex:4;
+  font-size: 25px;
+}
+/* Background-images */
+.panel1{
+  background: url("https://img.freepik.com/premium-photo/majestic-magical-fantasy-landscape-with-mountains-river-waterfall-sun-rays-3d-illustration_598586-1969.jpg?w=2000");
+}
+.panel2{
+  background: url("https://static.euronews.com/articles/stories/06/44/75/76/1440x810_cmsv2_ed3e1ded-042c-5179-966e-13290abaef09-6447576.jpg");
+}
+.panel3{
+  background: url("https://images.unsplash.com/photo-1542235222-30e843cb43a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGFkdmVudHVyZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
+}
+.panel4{
+  background: url("https://cdn.wallpapersafari.com/1/17/ZMBC10.jpg");
+}
+.panel5{
+  background: url("https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg");
+}
+
+.panel1,.panel2,.panel3,.panel4,.panel5{
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+}
