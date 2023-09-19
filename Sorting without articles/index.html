@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100vh;
+            background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000") black;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        .bands {
+            background: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(0, 0, 0, 0.9);
+            margin: auto;
+            list-style: inside square;
+            padding: 0;
+            box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+            width: 500px;
+            font-size: 20px;
+            overflow: scroll;
+            overflow-x: hidden;
+            max-height: 50vh;
+        }
+
+        li {
+            padding: 20px;
+            border-bottom: 1px solid #efefef;
+        }
+
+        li:last-child {
+            border-bottom: 0;
+        }
+
+        a {
+            color: #ffc600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="bands">
+        <li>Loading Bands...</li>
+        <li>Band 1</li>
+    </ul>
+    <script>
+        const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+        const bandList=document.querySelector(".bands");
+        // const articles=['A','An','The'];
+        // const bandWithoutArticles=bands.map((band,index) =>{
+        //     let s="";
+        //     let i=0;
+        //     for(i=0;i<band.length;i++)
+        //     {
+        //         if(band[i]==' ')
+        //             break;
+        //         s+=band[i];
+        //     }
+        //     if(articles.includes(s))
+        //     {
+        //         const newB={
+        //             band:band.substring(i+1),
+        //             idx:index
+        //         };
+        //         return newB;
+        //     }
+        //     else{
+        //         const newB={
+        //             band,
+        //             idx:index
+        //         };
+        //         return newB;
+        //     }
+        // });
+        // function compare(a,b){
+        //     if(a.band<b.band)
+        //     return -1;
+        //     else
+        //     return 1;
+        // }
+        // bandWithoutArticles.sort(compare);
+
+        
+        // const list=bandWithoutArticles.map(band => {
+        //     const id=band.idx;
+        //     return `<li>
+        //             ${bands[id]}
+        //         </li>`;
+        // }).join('');
+
+        // another approach using regular expressions
+        function strip(band){
+
+            return band.replace(/^(a |an |the )/i,'').trim();
+        }
+        console.log(strip('a old a dog the park'));
+        const sorted=bands.sort(function(a,b){
+            return strip(a)>strip(b)? 1:-1;
+        })
+        const list=bands.map(band => {
+            return `<li>
+                    ${band}
+                </li>`;
+        }).join('');
+        bandList.innerHTML=list;
+    </script>
+</body>
+
+</html>

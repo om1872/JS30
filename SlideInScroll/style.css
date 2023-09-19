@@ -1,0 +1,40 @@
+body{
+    background-color:#e4b859;
+    text-align: justify;
+    font-family: 'Montserrat';
+}
+.article{
+    margin:5% auto;
+    width:50%;
+    background: white;
+    padding: 2% 5%;
+}
+p{
+    padding: 5px;
+    line-height: 1.4;
+}
+img{
+    margin:0;
+    width:50%;
+    padding-top:5px;
+    padding-bottom:10px;
+    transition: all 0.3s;
+    /* padding-right:50px; */
+}
+.img-odd{
+    float:left;
+    padding-right: 50px;
+    transform: translateX(-50px) scale(0.95);
+    opacity: 0;
+}
+.img-even{
+    float:right;
+    padding-left:50px;
+    transform: translateX(50px) scale(0.95);
+    opacity: 0;
+}
+
+.slide-in{
+    transform: translate(0) scale(1);
+    opacity:1;
+}

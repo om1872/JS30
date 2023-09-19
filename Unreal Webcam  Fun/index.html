@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #bada55;
+            font-size:10px;
+        }
+
+        .panel {
+            align-self: start;
+            max-width: 50%;
+            background: #efefef;
+            margin:2rem auto;
+            padding: 15px;
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .panel:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .controls {
+            padding: 10px;
+        }
+
+        .photo {
+            width: 100%;
+            float: left;
+        }
+
+        .player {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+        }
+
+        .strip {
+            padding: 2rem;
+        }
+
+        .strip img {
+            width: 100px;
+            overflow-x: scroll;
+            padding: 0.8rem 0.8rem 2.5rem 0.8rem;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+            background: white;
+        }
+
+        .strip a:nth-child(5n+1) img {
+            transform: rotate(10deg);
+        }
+
+        .strip a:nth-child(5n+2) img {
+            transform: rotate(-2deg);
+        }
+
+        .strip a:nth-child(5n+3) img {
+            transform: rotate(8deg);
+        }
+
+        .strip a:nth-child(5n+4) img {
+            transform: rotate(-11deg);
+        }
+
+        .strip a:nth-child(5n+5) img {
+            transform: rotate(12deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel">
+        <div class="control-panel">
+            <button onclick="takePhoto()">Take Photo</button>
+            <div class="controls">
+                <div class="rgb">
+                    <label for="rmin">Red Min:</label>
+                    <input type="range" min=0 max=255 name="rmin" id="rmin">
+                    <label for="red-max">Red Max:</label>
+                    <input type="range" min=0 max=255 name="rmax" id="rmax">
+                </div>
+                <div class="rgb">
+                    <label for="bmin">Blue Min:</label>
+                    <input type="range" min=0 max=255 name="bmin" id="bmin">
+                    <label for="bmax">Blue Max:</label>
+                    <input type="range" min=0 max=255 name="bmax" id="bmax">
+                </div>
+                <div class="rgb">
+                    <label for="gmin">Green Min:</label>
+                    <input type="range" min=0 max=255 name="gmin" id="gmin">
+                    <label for="gmax">Green Max:</label>
+                    <input type="range" min=0 max=255 name="gmax" id="gmax">
+                </div>
+            </div>
+        </div>
+        <canvas class="photo"></canvas>
+        <video class="player">NaN</video>
+        <div class="strip"></div>
+    </div>
+    <script src="index.js"></script>
+</body>
+<audio class="snap" src="./snap.mp3" hidden></audio>
+
+</html>

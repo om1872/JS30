@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" height="800px" width="800px"></canvas>
+    <script>
+        const canvas=document.getElementById("canvas");
+        canvas.width=window.innerWidth;
+        canvas.height=window.innerHeight;
+        const ctx=canvas.getContext('2d');
+        ctx.lineCap="round";
+        ctx.lineJoin="round";
+        let clr=0;
+        ctx.strokeStyle=`hsl(${clr},100%,50%)`;
+        ctx.lineWidth=2;
+        let lastX,lastY;
+        [lastX,lastY]=[0,0]
+        let active=false;
+
+        const f=function(e){
+            if(!active)
+            return;
+            ctx.beginPath();
+            ctx.moveTo(lastX,lastY);
+            ctx.lineTo(e.offsetX,e.offsetY);
+            ctx.stroke();
+            lastX=e.offsetX;
+            lastY=e.offsetY;
+            ctx.strokeStyle=`hsl(${clr},100%,50%)`;
+            clr=(clr+1)%360;
+            console.log(clr);
+            if(ctx.lineWidth>=80)
+            {
+                ctx.lineWidth=2;
+            }
+            else
+                ctx.lineWidth++;
+            
+        }
+        
+        canvas.addEventListener('mousedown',(e) => {active=true;
+        lastX=e.offsetX;
+        lastY=e.offsetY;
+        ctx.lineWidth=2;
+        } );
+        canvas.addEventListener('mousemove',f);
+        canvas.addEventListener('mouseup', () => active=false);
+
+    </script>
+</body>
+</html>
