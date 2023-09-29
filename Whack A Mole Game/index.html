@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #E9B824;
+        }
+
+        .heading {
+            color: #D83F31;
+            font-size: 3rem;
+        }
+
+        .game_box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game_zone {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        .game_zone_body {
+            flex: 1;
+            display: flex;
+        }
+
+        .mole {
+            /*display: none;*/
+            position: absolute;
+            right: 5%;
+            top: 16.5%;
+            margin: auto 50%;
+            transition: all 2s;
+            transform: translateY(10px) scale(0.9);
+            opacity: 0;
+        }
+
+        .active {
+            /* display: block;*/
+            transform: translateY(-15px) scale(1.1);
+            opacity: 1;
+        }
+
+        
+
+        .mole_hole {
+            position: relative;
+            padding-top: 8%;
+        }
+
+        .button {
+            margin: 5px 5px;
+            color: #D83F31;
+            font-size: 2rem;
+            background-color: #fadcb1;
+            margin-top: 2.5%;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 5px solid #E55604;
+            border-radius: 1rem;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.6);
+        }
+        .btn-active {
+            background: #efefef;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game_box">
+        <div
+            style="background:#fadcb1; margin-top:2.5%; padding:10px; display: flex; justify-content: space-between; align-items: center; border: 5px solid #E55604; border-radius: 1rem; box-shadow: inset 0px 0px 5px rgba(0,0,0,0.6);">
+            <h1 class="heading">Whack A Mole</h1>
+            <img style="width: 7rem; padding-bottom: 2%;" src="./images/game.png" alt="mole_png">
+            <div class="score"
+                style="font-size: 3rem; color:#E55604; background:#FFCC70; margin-left:30px; padding: 10px 15px; border: 2px solid #E55604; border-radius: 10%;">
+                0</div>
+        </div>
+        <div class="game_zone">
+            <div class="game_zone_body">
+                <div class="mole_hole">
+                    <div data-mole="1" class="mole"><img style="width: 4rem;" src="./images/mole.svg" alt="hole"></div>
+                    <div class="hole"><img style="width: 70%;" src="./images/dirt.svg" alt="hole"></div>
+                </div>
+
+                <div class="mole_hole">
+                    <div data-mole="2" class="mole"><img style="width: 4rem;" src="./images/mole.svg" alt="hole"></div>
+                    <div class="hole"><img style="width: 70%;" src="./images/dirt.svg" alt="hole"></div>
+                </div>
+                <div class="mole_hole">
+                    <div data-mole="3" class="mole"><img style="width: 4rem;" src="./images/mole.svg" alt="hole"></div>
+                    <div class="hole"><img style="width: 70%;" src="./images/dirt.svg" alt="hole"></div>
+                </div>
+            </div>
+            <div class="game_zone_body">
+                <div class="mole_hole">
+                    <div data-mole="4" class="mole"><img style="width: 4rem;" src="./images/mole.svg" alt="hole"></div>
+                    <div class="hole"><img style="width: 70%;" src="./images/dirt.svg" alt="hole"></div>
+                </div>
+                <div class="mole_hole">
+                    <div data-mole="5" class="mole"><img style="width: 4rem;" src="./images/mole.svg" alt="hole"></div>
+                    <div class="hole"><img style="width: 70%;" src="./images/dirt.svg" alt="hole"></div>
+                </div>
+                <div class="mole_hole">
+                    <div data-mole="6" class="mole"><img style="width: 4rem;" src="./images/mole.svg" alt="hole"></div>
+                    <div class="hole"><img style="width: 70%;" src="./images/dirt.svg" alt="hole"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <button class="button-start button">
+                Start
+            </button>
+            <button class="button-stop button"
+                > Stop
+            </button>
+        </div>
+
+    </div>
+    <script>
+        const moles = document.querySelectorAll('.mole');
+        const start_button = document.querySelector('.button-start');
+        const stop_button = document.querySelector('.button-stop');
+        const score = document.querySelector('.score');
+        let mole;
+        let scr = 0;
+        let interval;
+        function start() {
+            start_button.classList.add('btn-active');
+            score.innerHTML = '0';
+            scr = 0;
+            start_button.disabled = true;
+            let count = 0;
+            mole = null;
+            let last;
+            clearInterval(interval);
+            interval = setInterval(function () {
+                if (count === 10) {
+                    mole.classList.remove('active');
+                    clearInterval(interval);
+                    start_button.classList.remove('btn-active');
+                    start_button.disabled = false;
+                    return;
+                }
+                if (mole != null)
+                    mole.classList.remove('active');
+                let hole = (Math.floor((Math.random()) * 10)) % 7;
+                while (last === hole || hole === 0)
+                    hole = (Math.floor((Math.random()) * 10)) % 7;
+
+                mole = document.querySelector(`[data-mole="${hole}"]`);
+                mole.classList.add('active');
+
+                last = hole;
+                count++;
+            }, 2000);
+
+            //mole.classList.remove('active');
+        }
+        function score_update() {
+            const val = document.querySelector('.mole.active');
+            console.log(this.dataset.mole);
+            if (val != null)
+                console.log("game", val.dataset.mole);
+            if (val != null && this.dataset.mole === val.dataset.mole) {
+                scr++;
+                score.innerHTML = `${scr}`;
+                console.log(scr);
+            }
+        }
+        function stop() {
+            clearInterval(interval);
+            start_button.disabled = false;
+            start_button.classList.remove('.btn-active');
+            score.innerHTML = `0`;
+            scr = 0;
+            moles.forEach(mole => {
+                if (mole.classList.contains('active'))
+                    mole.classList.remove('active');
+            })
+        }
+        moles.forEach(mole => mole.addEventListener('click', score_update));
+        start_button.addEventListener('click', start);
+        stop_button.addEventListener('click', stop);
+    </script>
+</body>
+
+</html>
